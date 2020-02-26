@@ -1,0 +1,8 @@
+Product:
+  name
+  category
+  description
+  img
+  price    how much i sell
+  cost     how much i brought
+  created
