@@ -12,6 +12,7 @@ class Product(models.Model):
     prodCategory    = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True)
     prodBrand       = models.ForeignKey('settings.Brand', on_delete=models.CASCADE, blank=True, null=True)
     prodDesc        = models.TextField(verbose_name=_("Product Description"))
+    prodImage       = models.ImageField(upload_to='product/', verbose_name=_("Image"), blank=True, null=True)
     prodPrice       = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Price"))
     prodCost        = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Cost"))
     prodCreated     = models.DateTimeField(verbose_name=_("Created at"))

@@ -24,4 +24,4 @@ class Variant(models.Model):
         verbose_name_plural = _("Variants")
 
     def __str__(self):
-        return self.brand_name
+        return self.variant_name
