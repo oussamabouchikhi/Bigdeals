@@ -4,6 +4,8 @@ from django.shortcuts import render
 from .models import Product
 
 def product_list(request):
+     # get all products
+    product_list = Product.objects.all()
     # to let django know that 'product_list' is this function so we can use it in templates
     context = {
         'product_list': product_list,

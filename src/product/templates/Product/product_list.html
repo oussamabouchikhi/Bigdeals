@@ -60,38 +60,25 @@
       <div class="container">
         <div class="row">
 
+
           {% for product in product_list %}
-
           <div class="col-md-3 m-2">
             <div class="row">
-              <div class="card">
-                <!-- {% if product.prodImage %}
-                  <img class="card-img-top" src="{{product.prodImage.url}}" alt="Card image cap">
-                {% else %}
-                  <img class="card-img-top" src="{% static 'site_static/img/default.png' %}" alt="Card image cap">
-                {% endif %} -->
-                <div class="card-body">
-                  <h5 class="card-title">Name:{{product}}</h5>
-                  <p class="card-text">Desc:{{product.prodDesc}}</p>
-                  <a href="#" class="btn btn-primary">Add to cart</a>
+                <div class="card" style="height:360px;">
+                  {% if product.prodImage %}
+                    <img class="card-img-top" style="width:286px; height:180px;" src="{{product.prodImage.url}}" alt="Card image cap">
+                  {% else %}
+                    <img class="card-img-top" src="{% static 'site_static/img/product.svg' %}" alt="Card image cap">
+                  {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title">{{product}}</h5>
+                    <p class="card-text">{{product.prodDesc|truncatewords:10}}</p>
+                    <a href="#" class="btn btn-primary">Add to cart</a>
+                  </div>
                 </div>
-              </div>
            </div>
           </div>
-
           {% endfor %}
-          <div class="col-md-3 m-2">
-            <div class="row">
-              <div class="card">
-                <img class="card-img-top" src="{% static 'site_static/img/air-max-270_1.JPG' %}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Name:</h5>
-                  <p class="card-text">Desc:</p>
-                  <a href="#" class="btn btn-primary">Add to cart</a>
-                </div>
-              </div>
-           </div>
-          </div>
 
         </div>
       </div>

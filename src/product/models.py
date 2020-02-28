@@ -25,7 +25,7 @@ class Product(models.Model):
         verbose_name_plural = _("Products")
 
     def __str__(self):
-        return self.prodName
+        return str(self.prodName)
 
 class ProductImage(models.Model):
     # Every product has an image. delete image if product deleted
