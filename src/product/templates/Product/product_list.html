@@ -201,25 +201,30 @@
       <div class="row wow fadeIn">
         {% for product in product_list %}
           <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card">
+            <div class="card" style="height: 380px;">
               <div class="view overlay">
                 {% if product.prodImage %}
-                  <img src="{{product.prodImage.url}}" class="card-img-top" alt="">
+                  <img style="height: 200px;" src="{{product.prodImage.url}}" class="card-img-top" alt="{{product.prodImage}}">
                 {% else %}
-                  <img src="{% static 'site_static/img/no_image_available.jpeg' %}" class="card-img-top" alt="">
+                  <img style="height: 200px;" src="{% static 'site_static/img/no_image_available.jpeg' %}" class="card-img-top" alt="default">
                 {% endif %}
                 <a><div class="mask rgba-white-slight"></div></a>
               </div>
               <div class="card-body text-center">
                 <a href="" class="grey-text"><h5> <a href="#"></a> </h5></a>
                 <h5>
-                  <strong>
-                    <a href="{% url 'products:product_detail' product.prodSlug %}" class="dark-grey-text">{{product.prodName}}
-                      <span class="badge badge-pill danger-color">NEW</span>
-                    </a>
-                  </strong>
+                  <strong><a href="{% url 'products:product_detail' product.prodSlug %}" class="dark-grey-text">{{product.prodName}}</a></strong>
                 </h5>
-                <h4 class="font-weight-bold blue-text"><strong>{{product.prodPrice}}$</strong></h4>
+                {% if product.prodIsBestseller %}
+                  <a href=""><span class="badge purple mr-1">Bestseller</span></a>
+                {% endif %}
+                {% if product.prodIsNew %}
+                  <a href=""><span class="badge blue mr-1">New</span></a>
+                {% endif %}
+                {% if product.prodIsLimited %}
+                  <a href=""><span class="badge red mr-1">Limited</span></a>
+                {% endif %}
+                <h4 style="margin-top: 25px;" class="font-weight-bold blue-text"><strong>{{product.prodPrice}}$</strong></h4>
               </div>
             </div>
           </div><!--Grid column-->
