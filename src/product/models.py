@@ -1,27 +1,28 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Product(models.Model):
-    prodName    = models.CharField(max_length=100, verbose_name=_("Product"))
+    prodName    = models.CharField(max_length=100, verbose_name=_("Name"))
     """
     - class Category is below, so we have to put it inside single quotes
     - Each product have a category
     - to avoid cross import erro we use 'appName.modelName' trick
     """
-    prodCategory      = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True)
-    prodBrand         = models.ForeignKey('settings.Brand', on_delete=models.CASCADE, blank=True, null=True)
-    prodDesc          = models.TextField(verbose_name=_("Product Description"))
+    prodCategory      = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_("Category"))
+    prodBrand         = models.ForeignKey('settings.Brand', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_("Brand"))
+    prodDesc          = models.TextField(verbose_name=_("Description"))
     prodImage         = models.ImageField(upload_to='product/', verbose_name=_("Image"), blank=True, null=True)
     prodPrice         = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Price"))
     prodOldPrice      = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Old Price"))
     prodCost          = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Cost"))
     prodCreated       = models.DateTimeField(verbose_name=_("Created at"))
-    prodSlug          = models.SlugField(blank=True, null=True)
-    prodIsNew         = models.BooleanField(default=True)
-    prodIsBestseller  = models.BooleanField(default=True)
-    prodIsLimited     = models.BooleanField(default=True)
+    prodSlug          = models.SlugField(blank=True, null=True, verbose_name=_("URL"))
+    prodIsNew         = models.BooleanField(default=True, verbose_name=_("New"))
+    prodIsBestseller  = models.BooleanField(default=True, verbose_name=_("Bestseller"))
+    prodIsLimited     = models.BooleanField(default=True, verbose_name=_("Limited"))
 
     """
     because Product model is a Class each producSt is an object(instance)
@@ -40,6 +41,9 @@ class Product(models.Model):
             # Generate a slug from product name
             self.prodSlug = slugify(self.prodName)
         super(Product, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('products:product_detail', kwargs={'slug': self.prodSlug})
 
     def __str__(self):
         return str(self.prodName)

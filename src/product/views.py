@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import Product
@@ -22,7 +22,9 @@ def product_list(request):
 
 def product_details(request, slug):
     # get product which has this slug
-    product_details = Product.objects.get(prodSlug=slug)
+    # product_details = Product.objects.get(prodSlug=slug) or use
+    # if object(product) not found a 404 error page will be displayed
+    product_details = get_object_or_404(Product, prodSlug=slug)
     context = {
         'product_details': product_details,
     }

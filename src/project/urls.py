@@ -18,9 +18,20 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+"""
+path('', include('product.urls', namespace='products')),
+when you open admin panel 'http://127.0.0.1:8000/admin/'
+django will think admin is a slug [if you're usnig slug as url]
+so to resolve this problem we use 'products/' instead of leaving it empty
+'' => 'http://127.0.0.1:8000/'
+'products/' => 'http://127.0.0.1:8000/products/' : main products page
+"""
+
 urlpatterns = [
+    # 'http://127.0.0.1:8000/admin/'
     path('admin/', admin.site.urls),
-    path('', include('product.urls', namespace='products')),
+    # 'http://127.0.0.1:8000/products/'
+    path('products/', include('product.urls', namespace='products')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

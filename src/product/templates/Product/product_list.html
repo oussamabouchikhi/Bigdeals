@@ -213,7 +213,9 @@
               <div class="card-body text-center">
                 <a href="" class="grey-text"><h5> <a href="#"></a> </h5></a>
                 <h5>
-                  <strong><a href="{% url 'products:product_detail' product.prodSlug %}" class="dark-grey-text">{{product.prodName}}</a></strong>
+                  <!-- <strong><a href="{% url 'products:product_detail' product.prodSlug %}" class="dark-grey-text">{{product.prodName}}</a></strong> -->
+                  <!-- After using reverse & get_absolute_url -->
+                  <strong><a href="{{product.get_absolute_url}}" class="dark-grey-text">{{product.prodName}}</a></strong>
                 </h5>
                 {% if product.prodIsBestseller %}
                   <a href=""><span class="badge purple mr-1">Bestseller</span></a>
@@ -241,7 +243,7 @@
 
         <!--Arrow left-->
         {% if product_list.has_previous %}
-        <li class="page-item disabled">
+        <li class="page-item">
           <a class="page-link" href="?page={{product_list.previous_page_number}}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
