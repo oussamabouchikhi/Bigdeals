@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 
 # Create your models here.
 class Product(models.Model):
@@ -16,6 +17,8 @@ class Product(models.Model):
     prodPrice       = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Price"))
     prodCost        = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Cost"))
     prodCreated     = models.DateTimeField(verbose_name=_("Created at"))
+    prodSlug        = models.SlugField(blank=True, null=True)
+
     """
     because Product model is a Class each producSt is an object(instance)
     so we need to define __str__ function to show the name of each product
@@ -23,6 +26,16 @@ class Product(models.Model):
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
+
+    """
+    Override save method
+    """
+    def save(self, *args, **kwargs)
+        # if there is no slug
+        if not self.prodSlug :
+            # Generate a slug from product name
+            self.prodSlug = slugify(prodName)
+        super(Product, self).save(*args, **kwargs)  
 
     def __str__(self):
         return str(self.prodName)
