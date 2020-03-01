@@ -1,6 +1,9 @@
 # BigDeals
 Bigdeals, an ecommerce website designed using Bootstrao 4.4 & developed with Django3
 
+## Screenshot
+![](shot1.jpg)
+
 ## Tools & Languages
 ## Text Editor
  - [Atom.io](https://atom.io/)
