@@ -8,7 +8,7 @@ def product_list(request):
      # get all products
     product_list = Product.objects.all()
 
-    paginator = Paginator(product_list, 1) #Show 1 products per page.
+    paginator = Paginator(product_list, 16) #Show 16 products per page.
     page_number = request.GET.get('page')
     product_list = paginator.get_page(page_number)
 
@@ -20,9 +20,9 @@ def product_list(request):
 
 
 
-def product_details(request, id):
-    # get product which has this id
-    product_details = Product.objects.get(id=id)
+def product_details(request, slug):
+    # get product which has this slug
+    product_details = Product.objects.get(prodSlug=slug)
     context = {
         'product_details': product_details,
     }

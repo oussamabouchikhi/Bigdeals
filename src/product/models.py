@@ -30,12 +30,12 @@ class Product(models.Model):
     """
     Override save method
     """
-    def save(self, *args, **kwargs)
+    def save(self, *args, **kwargs):
         # if there is no slug
         if not self.prodSlug :
             # Generate a slug from product name
-            self.prodSlug = slugify(prodName)
-        super(Product, self).save(*args, **kwargs)  
+            self.prodSlug = slugify(self.prodName)
+        super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(self.prodName)
