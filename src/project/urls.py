@@ -32,6 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 'http://127.0.0.1:8000/products/'
     path('products/', include('product.urls', namespace='products')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
