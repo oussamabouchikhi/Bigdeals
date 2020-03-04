@@ -30,7 +30,15 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+"""
+defining 'accounts' first will override django admin design template
+and will apply our custom design templates
+"""
+
 INSTALLED_APPS = [
+
+    'accounts',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +48,6 @@ INSTALLED_APPS = [
 
     'product',
     'settings',
-    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +137,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# Redirect to home URL after login/Logout (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
