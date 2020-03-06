@@ -7,7 +7,7 @@ urlpatterns = [
 
     # accounts/signup
     path('signup', views.signup, name="signup"),
-    # accounts/signup
-    path('<slug:slug>', views.profile, name="profile"),
+    # accounts/profile/slug
+    path('profile/<slug:slug>', views.profile, name="profile"),
 
 ]

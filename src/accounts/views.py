@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate
 from .models import Profile
 from .forms import UserForm, ProfileForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def signup(request):
@@ -27,8 +28,9 @@ def signup(request):
     }
     return render(request, 'registration/signup.html', context)
 
-
+# login required to access user profile
+@login_required(login_url = 'accounts/login')
 def profile(request, slug):
     profile = get_object_or_404(Profile, slug=slug)
     context = {'profile': profile}
-    return render(request, 'profile.html', context)
+    return render(request, 'registration/profile.html', context)
